@@ -13,7 +13,7 @@
 <body>
     <div class="form-container">
         <?php if (!empty($aanbevolen_gebied_naam)): ?>
-            <h2>Aanbevolen Skigebieden</h2>
+            <h2>Aanbevolen Skigebied</h2>
             <div class="antwoord-container">
                 <div class="aanbeveling-balkje"><?php echo htmlspecialchars($aanbevolen_gebied_naam); ?></div>
             </div>
