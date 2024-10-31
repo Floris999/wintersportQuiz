@@ -1,0 +1,101 @@
+{
+    "vragen": [
+        {
+            "vraag": "Heb je een voorkeur voor een bepaald land?",
+            "antwoorden": [
+                "1 Oostenrijk",
+                "2 Zwitserland",
+                "3 Duitsland",
+                "4 Italië",
+                "Geen voorkeur"
+            ]
+        },
+        {
+            "vraag": "Moet het skidorp in de buurt van een vliegveld zijn?",
+            "antwoorden": [
+                "1 Ja, op minder dan een uur rijden",
+                "2 Ja, op 1 tot 1,5 uur rijden",
+                "3 Nee, ik ga niet vliegen of langer dan 1,5 uur tot de airport is prima"
+            ]
+        },
+        {
+            "vraag": "Hoe groot moet het skigebied zijn (aantal pistekilometers)?",
+            "antwoorden": [
+                "1 Klein (tot 60 km)",
+                "2 Gemiddeld (60-100 km)",
+                "3 Groot (100-200 km)",
+                "4 Extreem groot (meer dan 200 km)",
+                "Geen voorkeur"
+            ]
+        },
+        {
+            "vraag": "Hoe belangrijk is sneeuwzekerheid voor je?",
+            "antwoorden": [
+                "1 Heel belangrijk, ik wil absoluut een gletsjer",
+                "2 Belangrijk: een groot deel moet boven de 2000m liggen",
+                "3 Een gebied met veel kunstsneeuwvoorzieningen is voldoende!",
+                "4 Maakt me niet uit"
+            ]
+        },
+        {
+            "vraag": "Moet het gebied kindvriendelijk en/of makkelijk zijn?",
+            "antwoorden": [
+                "1 Ja, er moeten vooral makkelijke (blauwe) pistes zijn",
+                "2 Nee, ik zoek vooral een (erg) uitdagend gebied met vooral rode en zwarte pistes",
+                "3 Geen voorkeur, een mix van blauwe, rode en zwarte pistes is goed!"
+            ]
+        },
+        {
+            "vraag": "Wil je uitgebreide off-piste mogelijkheden (en fun- en freestyleparks)?",
+            "antwoorden": [
+                "1 Ja, ik wil goede offpiste opties hebben (zoals officiële off-piste trails)",
+                "2 Nee, dit is geen vereiste!"
+            ]
+        },
+        {
+            "vraag": "Hoe belangrijk zijn après-ski en een bruisende sfeer van het dorp voor je?",
+            "antwoorden": [
+                "1 Ik wil veel opties voor après-ski",
+                "2 Ik zoek vooral een rustig dorp!",
+                "3 Mij maakt het niet uit, een mix is ook goed!"
+            ]
+        },
+        {
+            "vraag": "Zijn andere activiteiten naast skiën belangrijk zoals langlaufen, rodelen, wellness of winterwandelingen?",
+            "antwoorden": [
+                "1 Ja, heel belangrijk",
+                "2 Leuk, maar niet essentieel"
+            ]
+        },
+        {
+            "vraag": "Zoek je een ski-in/ski-out dorp EN zoek je een (zeer) modern skigebied?",
+            "antwoorden": [
+                "1 Ik wil ski-in/ski/out én moderne liften",
+                "2 Ik wil enkel ski-in/ski/out, hoe modern de liften zijn maakt niet uit!",
+                "3 Ik wil moderne liften! Ski-in/ski/out is GEEN vereiste!",
+                "4 Het maakt mij allebei niet uit"
+            ]
+        },
+        {
+            "vraag": "Met wie ga je op wintersport?",
+            "antwoorden": [
+                "1 Familie/gezin",
+                "2 Vriendengroep",
+                "3 Alleen",
+                "4 Sportgroep of club",
+                "Geen voorkeur/nog niet duidelijk"
+            ]
+        },
+        {
+            "vraag": "Hoeveel nachten ga je weg en wat is je budget?",
+            "antwoorden": [
+                "1 Max 4 nachten: GOEDKOPER gebied",
+                "2 5 tot 8 nachten: GOEDKOPER gebied",
+                "3 9+ nachten; GOEDKOPER gebied",
+                "4 Max 4 nachten: ruimer budget",
+                "5 5 tot 8 nachten: ruimer budget",
+                "6 9+ nachten: ruimer budget"
+            ]
+        }
+    ]
+}
