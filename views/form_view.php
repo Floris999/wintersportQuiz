@@ -13,7 +13,7 @@
 <body>
     <div class="form-container">
         <?php if (!empty($aanbevolen_gebied_naam)): ?>
-            <h2>Aanbevolen Skigebied</h2>
+            <h2>Aanbevolen Skigebieden</h2>
             <div class="antwoord-container">
                 <div class="aanbeveling-balkje"><?php echo htmlspecialchars($aanbevolen_gebied_naam); ?></div>
             </div>
@@ -26,10 +26,9 @@
             <form id="survey-form" method="POST">
                 <p><?php echo htmlspecialchars($vragen[$vraag_nummer]); ?></p>
                 <?php foreach ($antwoorden[$vraag_nummer] as $index => $antwoord): ?>
-                    <?php $antwoord_parts = explode(' ', $antwoord, 2); ?>
-                    <div class="answer-option" data-index="<?php echo $antwoord_parts[0]; ?>">
+                    <div class="answer-option" data-index="<?php echo $index; ?>">
                         <input type="radio" name="antwoord" value="<?php echo htmlspecialchars($antwoord); ?>" id="option-<?php echo $index; ?>" required>
-                        <label for="option-<?php echo $index; ?>"><?php echo htmlspecialchars($antwoord_parts[1] ?? $antwoord); ?></label>
+                        <label for="option-<?php echo $index; ?>"><?php echo htmlspecialchars($antwoord); ?></label>
                     </div>
                 <?php endforeach; ?>
                 <input type="hidden" name="vraag_nummer" value="<?php echo $vraag_nummer; ?>">
