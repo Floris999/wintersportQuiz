@@ -12,14 +12,20 @@
 
 <body>
     <div class="form-container">
-        <?php if (!empty($aanbevolen_gebied_naam)): ?>
-            <h2>Aanbevolen Skigebied</h2>
+        <?php if (!empty($aanbevolen_gebied_naam) && $aanbevolen_gebied_naam !== 'Geen aanbeveling'): ?>
+            <h2>Aanbevolen Skigebieden</h2>
             <div class="antwoord-container">
                 <div class="aanbeveling-balkje"><?php echo htmlspecialchars($aanbevolen_gebied_naam); ?></div>
             </div>
             <form method="POST">
                 <input type="hidden" name="action" value="restart">
                 <button type="submit" class="restart-button">Start Opnieuw</button>
+            </form>
+        <?php elseif (isset($aanbevolen_gebied_naam) && $aanbevolen_gebied_naam === 'Geen aanbeveling'): ?>
+            <h2>Geen aanbeveling gevonden</h2>
+            <form method="POST">
+                <input type="hidden" name="action" value="restart">
+                <button type="submit" class="restart-button">Probeer Opnieuw</button>
             </form>
         <?php else: ?>
             <h2>Wintersport Aanbeveling Vragenlijst</h2>

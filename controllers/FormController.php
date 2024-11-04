@@ -66,7 +66,12 @@ class FormController
 
     private function get_recommendations($antwoorden)
     {
-        $json_path = plugin_dir_path(dirname(__FILE__)) . 'gebieden.json';
+        $land = $antwoorden[0]['value']; 
+        $json_path = plugin_dir_path(dirname(__FILE__)) . 'gebieden_' . strtolower($land) . '.json';
+        if (!file_exists($json_path)) {
+            return null;
+        }
+
         $json_data = file_get_contents($json_path);
         $gebieden = json_decode($json_data, true);
 
@@ -76,13 +81,13 @@ class FormController
         foreach ($gebieden as $gebied) {
             $score = 0;
 
-            $score += isset($gebied['vliegveld']) ? abs(intval($antwoorden[1]['index']) - intval($gebied['vliegveld'])) : PHP_INT_MAX;
-            $score += isset($gebied['prijsniveau']) ? abs(intval($antwoorden[10]['index']) - intval($gebied['prijsniveau'])) : PHP_INT_MAX;
-            $score += isset($gebied['niveau']) ? abs(intval($antwoorden[4]['index']) - intval($gebied['niveau'])) : PHP_INT_MAX;
-            $score += isset($gebied['sneeuwzekerheid']) ? abs(intval($antwoorden[3]['index']) - intval($gebied['sneeuwzekerheid'])) : PHP_INT_MAX;
-            $score += isset($gebied['offpiste']) ? abs(intval($antwoorden[5]['index']) - intval($gebied['offpiste'])) : PHP_INT_MAX;
-            $score += isset($gebied['sfeer']) ? abs(intval($antwoorden[6]['index']) - intval($gebied['sfeer'])) : PHP_INT_MAX;
-            $score += isset($gebied['faciliteiten']) ? abs(intval($antwoorden[7]['index']) - intval($gebied['faciliteiten'])) : PHP_INT_MAX;
+            $score += $this->calculate_score($antwoorden[1]['index'], $gebied['vliegveld']);
+            $score += $this->calculate_score($antwoorden[10]['index'], $gebied['prijsniveau']);
+            $score += $this->calculate_score($antwoorden[4]['index'], $gebied['niveau']);
+            $score += $this->calculate_score($antwoorden[3]['index'], $gebied['sneeuwzekerheid']);
+            $score += $this->calculate_score($antwoorden[5]['index'], $gebied['offpiste']);
+            $score += $this->calculate_score($antwoorden[6]['index'], $gebied['sfeer']);
+            $score += $this->calculate_score($antwoorden[7]['index'], $gebied['faciliteiten']);
 
             if ($score < $beste_score) {
                 $beste_score = $score;
@@ -90,29 +95,51 @@ class FormController
             }
         }
 
-        return $beste_match ? $beste_match : [];
+        return $beste_match ? $beste_match : null;
+    }
+
+    private function calculate_score($antwoord, $gebied_waarde)
+    {
+        $antwoord_waarden = explode(';', $antwoord);
+        $gebied_waarden = explode(';', $gebied_waarde);
+
+        $min_score = PHP_INT_MAX;
+        foreach ($antwoord_waarden as $antwoord_waarde) {
+            foreach ($gebied_waarden as $gebied_waarde) {
+                $score = abs(intval($antwoord_waarde) - intval($gebied_waarde));
+                if ($score < $min_score) {
+                    $min_score = $score;
+                }
+            }
+        }
+
+        return $min_score;
     }
 
     private function save_answers($antwoorden)
     {
         $aanbevolen_gebied = $this->get_recommendations($antwoorden);
 
-        $this->wpdb->insert($this->table_name_wintersport, [
-            'land' => $antwoorden[0]['index'],
-            'vliegveld' => $antwoorden[1]['index'],
-            'grootte' => $antwoorden[2]['index'],
-            'sneeuwzekerheid' => $antwoorden[3]['index'],
-            'kindvriendelijk' => $antwoorden[4]['index'],
-            'offpiste' => $antwoorden[5]['index'],
-            'apresski' => $antwoorden[6]['index'],
-            'activiteiten' => $antwoorden[7]['index'],
-            'skimodern' => $antwoorden[8]['index'],
-            'metwie' => $antwoorden[9]['index'],
-            'budget' => $antwoorden[10]['index'],
-            'aanbeveling' => isset($aanbevolen_gebied['gebied']) ? $aanbevolen_gebied['gebied'] : 'Geen aanbeveling'
-        ]);
+        if ($aanbevolen_gebied) {
+            $this->wpdb->insert($this->table_name_wintersport, [
+                'land' => $antwoorden[0]['index'],
+                'vliegveld' => $antwoorden[1]['index'],
+                'grootte' => $antwoorden[2]['index'],
+                'sneeuwzekerheid' => $antwoorden[3]['index'],
+                'kindvriendelijk' => $antwoorden[4]['index'],
+                'offpiste' => $antwoorden[5]['index'],
+                'apresski' => $antwoorden[6]['index'],
+                'activiteiten' => $antwoorden[7]['index'],
+                'skimodern' => $antwoorden[8]['index'],
+                'metwie' => $antwoorden[9]['index'],
+                'budget' => $antwoorden[10]['index'],
+                'aanbeveling' => $aanbevolen_gebied['gebied']
+            ]);
 
-        $aanbevolen_gebied_naam = isset($aanbevolen_gebied['gebied']) ? $aanbevolen_gebied['gebied'] : 'Geen aanbeveling';
+            $aanbevolen_gebied_naam = $aanbevolen_gebied['gebied'];
+        } else {
+            $aanbevolen_gebied_naam = 'Geen aanbeveling';
+        }
 
         ob_start();
         include plugin_dir_path(__FILE__) . '../views/form_view.php';
