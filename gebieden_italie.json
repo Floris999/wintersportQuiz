@@ -1,0 +1,24 @@
+[
+  {
+    "gebied": "Meran 2000",
+    "land": "4",
+    "vliegveld": "",
+    "prijsniveau": "1",
+    "sneeuwzekerheid": "2;3",
+    "niveau": "1;2",
+    "offpiste": "1",
+    "sfeer": "2",
+    "faciliteiten": "1"
+  },
+  {
+    "gebied": "Schwemmalm",
+    "land": "4",
+    "vliegveld": "",
+    "prijsniveau": "1",
+    "sneeuwzekerheid": "2;3",
+    "niveau": "2",
+    "offpiste": "1",
+    "sfeer": "2",
+    "faciliteiten": ""
+  }
+]

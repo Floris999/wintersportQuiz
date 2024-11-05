@@ -1045,28 +1045,6 @@
         "faciliteiten": ""
     },
     {
-        "gebied": "Laax",
-        "land": "2",
-        "vliegveld": "",
-        "prijsniveau": "4",
-        "sneeuwzekerheid": "2;3",
-        "niveau": "1;2",
-        "offpiste": "1",
-        "sfeer": "1;2",
-        "faciliteiten": "1"
-    },
-    {
-        "gebied": "Verbier ",
-        "land": "2",
-        "vliegveld": "",
-        "prijsniveau": "4",
-        "sneeuwzekerheid": "2;3",
-        "niveau": "1;2",
-        "offpiste": "1",
-        "sfeer": "1;2",
-        "faciliteiten": "1"
-    },
-    {
         "gebied": "Zugspitze",
         "land": "3",
         "vliegveld": "",
@@ -1087,27 +1065,5 @@
         "offpiste": "",
         "sfeer": "2",
         "faciliteiten": "1"
-    },
-    {
-        "gebied": "Meran 2000",
-        "land": "4",
-        "vliegveld": "",
-        "prijsniveau": "1",
-        "sneeuwzekerheid": "2;3",
-        "niveau": "1;2",
-        "offpiste": "1",
-        "sfeer": "2",
-        "faciliteiten": "1"
-    },
-    {
-        "gebied": "Schwemmalm",
-        "land": "4",
-        "vliegveld": "",
-        "prijsniveau": "1",
-        "sneeuwzekerheid": "2;3",
-        "niveau": "2",
-        "offpiste": "1",
-        "sfeer": "2",
-        "faciliteiten": ""
     }
 ]
