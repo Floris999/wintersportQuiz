@@ -15,7 +15,11 @@
         <?php if (!empty($aanbevolen_gebied_naam) && $aanbevolen_gebied_naam !== 'Geen aanbeveling'): ?>
             <h2>Aanbevolen Skigebieden</h2>
             <div class="antwoord-container">
-                <div class="aanbeveling-balkje"><?php echo htmlspecialchars($aanbevolen_gebied_naam); ?></div>
+                <?php
+                $aanbevolen_gebied_array = json_decode($aanbevolen_gebied_naam, true);
+                foreach ($aanbevolen_gebied_array as $gebied_naam): ?>
+                    <div class="aanbeveling-balkje"><?php echo htmlspecialchars($gebied_naam); ?></div>
+                <?php endforeach; ?>
             </div>
             <form method="POST">
                 <input type="hidden" name="action" value="restart">

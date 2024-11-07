@@ -66,7 +66,7 @@ class FormController
 
     private function get_recommendations($antwoorden)
     {
-        $land = $antwoorden[0]['value']; 
+        $land = $antwoorden[0]['value'];
         $json_path = plugin_dir_path(dirname(__FILE__)) . 'gebieden_' . strtolower($land) . '.json';
         if (!file_exists($json_path)) {
             return null;
@@ -75,8 +75,7 @@ class FormController
         $json_data = file_get_contents($json_path);
         $gebieden = json_decode($json_data, true);
 
-        $beste_match = null;
-        $beste_score = PHP_INT_MAX;
+        $gebieden_met_scores = [];
 
         foreach ($gebieden as $gebied) {
             $score = 0;
@@ -89,14 +88,21 @@ class FormController
             $score += $this->calculate_score($antwoorden[6]['index'], $gebied['sfeer']);
             $score += $this->calculate_score($antwoorden[7]['index'], $gebied['faciliteiten']);
 
-            if ($score < $beste_score) {
-                $beste_score = $score;
-                $beste_match = $gebied;
-            }
+            $gebieden_met_scores[] = [
+                'gebied' => $gebied,
+                'score' => $score
+            ];
         }
 
-        return $beste_match ? $beste_match : null;
+        usort($gebieden_met_scores, function ($a, $b) {
+            return $a['score'] - $b['score'];
+        });
+
+        $top_gebieden = array_slice($gebieden_met_scores, 0, 5);
+
+        return $top_gebieden;
     }
+
 
     private function calculate_score($antwoord, $gebied_waarde)
     {
@@ -116,11 +122,15 @@ class FormController
         return $min_score;
     }
 
-    private function save_answers($antwoorden)
+    private function save_answers($antwoorden, $aanbevolen_gebieden)
     {
-        $aanbevolen_gebied = $this->get_recommendations($antwoorden);
+        if ($aanbevolen_gebieden) {
+            $aanbevolen_gebied_namen = array_map(function ($gebied) {
+                return $gebied['gebied']['gebied'];
+            }, $aanbevolen_gebieden);
 
-        if ($aanbevolen_gebied) {
+            $aanbevolen_gebieden_json = json_encode($aanbevolen_gebied_namen);
+
             $this->wpdb->insert($this->table_name_wintersport, [
                 'land' => $antwoorden[0]['index'],
                 'vliegveld' => $antwoorden[1]['index'],
@@ -133,10 +143,10 @@ class FormController
                 'skimodern' => $antwoorden[8]['index'],
                 'metwie' => $antwoorden[9]['index'],
                 'budget' => $antwoorden[10]['index'],
-                'aanbeveling' => $aanbevolen_gebied['gebied']
+                'aanbeveling' => $aanbevolen_gebieden_json  // Opslaan als JSON
             ]);
 
-            $aanbevolen_gebied_naam = $aanbevolen_gebied['gebied'];
+            $aanbevolen_gebied_naam = $aanbevolen_gebieden_json;
         } else {
             $aanbevolen_gebied_naam = 'Geen aanbeveling';
         }
