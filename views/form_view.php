@@ -37,8 +37,11 @@
                 <p><?php echo htmlspecialchars($vragen[$vraag_nummer]); ?></p>
                 <?php foreach ($antwoorden[$vraag_nummer] as $index => $antwoord): ?>
                     <div class="answer-option" data-index="<?php echo $index; ?>">
+                        <?php
+                        $antwoord_tekst = preg_replace('/^\d+\s/', '', $antwoord);
+                        ?>
                         <input type="radio" name="antwoord" value="<?php echo htmlspecialchars($antwoord); ?>" id="option-<?php echo $index; ?>" required>
-                        <label for="option-<?php echo $index; ?>"><?php echo htmlspecialchars($antwoord); ?></label>
+                        <label for="option-<?php echo $index; ?>"><?php echo htmlspecialchars($antwoord_tekst); ?></label>
                     </div>
                 <?php endforeach; ?>
                 <input type="hidden" name="vraag_nummer" value="<?php echo $vraag_nummer; ?>">
