@@ -143,7 +143,7 @@ class FormController
                 'skimodern' => $antwoorden[8]['index'],
                 'metwie' => $antwoorden[9]['index'],
                 'budget' => $antwoorden[10]['index'],
-                'aanbeveling' => $aanbevolen_gebieden_json  // Opslaan als JSON
+                'aanbeveling' => $aanbevolen_gebieden_json
             ]);
 
             $aanbevolen_gebied_naam = $aanbevolen_gebieden_json;

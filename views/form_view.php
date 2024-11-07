@@ -31,6 +31,12 @@
                 <input type="hidden" name="action" value="restart">
                 <button type="submit" class="restart-button">Probeer Opnieuw</button>
             </form>
+        <?php elseif (isset($aanbevolen_gebied_naam) && $aanbevolen_gebied_naam === 'Geen aanbeveling'): ?>
+            <h2>Geen aanbeveling gevonden</h2>
+            <form method="POST">
+                <input type="hidden" name="action" value="restart">
+                <button type="submit" class="restart-button">Probeer Opnieuw</button>
+            </form>
         <?php else: ?>
             <h2>Wintersport Aanbeveling Vragenlijst</h2>
             <form id="survey-form" method="POST">
